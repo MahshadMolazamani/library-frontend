@@ -1,8 +1,24 @@
 import {ReturnBook} from "./ReturnBook";
+import {useEffect, useState} from "react";
+import BookModel from "../../../models/BookModel";
 
 export const Carousel = () => {
+    const [books, setBooks] = useState<BookModel[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+
+        };
+        fetchBooks().catch((error: any) => {
+            setIsLoading(false);
+            setHttpError(error.message);
+        })
+    }, []);
+
     return (
-        <div className='container mt-5' style={{ height: 550 }}>
+        <div className='container mt-5' style={{height: 550}}>
             <div className='homepage-carousel-title'>
                 <h3>Find your next "I stayed up too late reading" book.</h3>
             </div>
@@ -13,32 +29,32 @@ export const Carousel = () => {
                 <div className='carousel-inner'>
                     <div className='carousel-item active'>
                         <div className='row d-flex justify-content-center align-items-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
+                            <ReturnBook/>
+                            <ReturnBook/>
+                            <ReturnBook/>
                         </div>
                     </div>
                     <div className='carousel-item'>
                         <div className='row d-flex justify-content-center align-items-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
+                            <ReturnBook/>
+                            <ReturnBook/>
+                            <ReturnBook/>
                         </div>
                     </div>
                     <div className='carousel-item'>
                         <div className='row d-flex justify-content-center align-items-center'>
-                            <ReturnBook />
-                            <ReturnBook />
-                            <ReturnBook />
+                            <ReturnBook/>
+                            <ReturnBook/>
+                            <ReturnBook/>
                         </div>
                     </div>
                     <button className='carousel-control-prev' type='button'
-                        data-bs-target='#carouselExampleControls' data-bs-slide='prev'>
+                            data-bs-target='#carouselExampleControls' data-bs-slide='prev'>
                         <span className='carousel-control-prev-icon' aria-hidden='true'></span>
                         <span className='visually-hidden'>Previous</span>
                     </button>
                     <button className='carousel-control-next' type='button'
-                        data-bs-target='#carouselExampleControls' data-bs-slide='next'>
+                            data-bs-target='#carouselExampleControls' data-bs-slide='next'>
                         <span className='carousel-control-next-icon' aria-hidden='true'></span>
                         <span className='visually-hidden'>Next</span>
                     </button>
@@ -48,7 +64,7 @@ export const Carousel = () => {
             {/* Mobile */}
             <div className='d-lg-none mt-3'>
                 <div className='row d-flex justify-content-center align-items-center'>
-                    <ReturnBook />
+                    <ReturnBook/>
                 </div>
             </div>
             <div className='homepage-carousel-title mt-3'>

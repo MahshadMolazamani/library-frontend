@@ -49,7 +49,7 @@ export const Carousel = () => {
 
     if (isLoading) {
         return (
-            <SpinnerLoading />
+            <SpinnerLoading/>
         )
     }
 

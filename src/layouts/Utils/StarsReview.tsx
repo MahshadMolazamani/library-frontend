@@ -2,18 +2,21 @@ import {useEffect, useState} from "react";
 
 export const StarsReview: React.FC<{ rating: number, size: number }> = (props) => {
 
+    let rating = props.rating;
     const [starFilled, setStarFilled] = useState<number>(0);
     const [starHalf, setStarHalf] = useState<number>(0);
     const [starEmpty, setStarEmpty] = useState<number>(0);
 
     useEffect(() => {
-        const filled = Math.floor(props.rating);
-        const half = props.rating % 1 >= 0.5 ? 1 : 0;
-        const empty = 5 - filled - half;
+        if (rating !== undefined && rating >= 0 && rating <= 5) {
+            const filled = Math.floor(props.rating);
+            const half = props.rating % 1 >= 0.5 ? 1 : 0;
+            const empty = 5 - filled - half;
 
-        setStarFilled(filled);
-        setStarHalf(half);
-        setStarEmpty(empty);
+            setStarFilled(filled);
+            setStarHalf(half);
+            setStarEmpty(empty);
+        }
     }, [props.rating]);
 
     return (

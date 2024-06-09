@@ -7,10 +7,15 @@ export const StarsReview: React.FC<{ rating: number, size: number }> = (props) =
     const [starEmpty, setStarEmpty] = useState<number>(0);
 
     useEffect(() => {
-        setStarFilled(props.rating);
-        setStarHalf(props.rating % 1 >= 0.5 ? 1 : 0);
-        setStarEmpty(starHalf === 1 ? 5 - props.rating : 6 - props.rating);
-    })
+        const filled = Math.floor(props.rating);
+        const half = props.rating % 1 >= 0.5 ? 1 : 0;
+        const empty = 5 - filled - half;
+
+        setStarFilled(filled);
+        setStarHalf(half);
+        setStarEmpty(empty);
+    }, [props.rating]);
+
     return (
         <div>
             {Array.from({length: starFilled}, (_, i) =>

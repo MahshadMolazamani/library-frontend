@@ -1,8 +1,19 @@
+import {useEffect, useState} from "react";
+
 export const StarsReview: React.FC<{ rating: number, size: number }> = (props) => {
 
+    const [starFilled, setStarFilled] = useState<number>(0);
+    const [starHalf, setStarHalf] = useState<number>(0);
+    const [starEmpty, setStarEmpty] = useState<number>(0);
+
+    useEffect(() => {
+        setStarFilled(props.rating);
+        setStarHalf(props.rating % 1 >= 0.5 ? 1 : 0);
+        setStarEmpty(starHalf === 1 ? 5 - props.rating : 6 - props.rating);
+    })
     return (
         <div>
-            {Array.from({length: 3}, (_, i) =>
+            {Array.from({length: starFilled}, (_, i) =>
                 <svg key={i}
                      xmlns="http://www.w3.org/2000/svg" width={props.size} height={props.size} fill="currentColor"
                      className="bi bi-star-fill" style={{color: "gold"}} viewBox="0 0 16 16">
@@ -10,7 +21,7 @@ export const StarsReview: React.FC<{ rating: number, size: number }> = (props) =
                         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                 </svg>
             )}
-            {Array.from({length: 1}, (_, i) =>
+            {Array.from({length: starHalf}, (_, i) =>
                 <svg key={i}
                      xmlns="http://www.w3.org/2000/svg" width={props.size} height={props.size} fill="currentColor"
                      className="bi bi-star-half" style={{color: "gold"}} viewBox="0 0 16 16">
@@ -19,7 +30,7 @@ export const StarsReview: React.FC<{ rating: number, size: number }> = (props) =
                 </svg>
             )}
 
-            {Array.from({length: 1}, (_, i) =>
+            {Array.from({length: starEmpty}, (_, i) =>
                 <svg key={i}
                      xmlns="http://www.w3.org/2000/svg" width={props.size} height={props.size} fill="currentColor"
                      className="bi bi-star"
